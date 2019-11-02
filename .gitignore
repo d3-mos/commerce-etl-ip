@@ -1,0 +1,21 @@
+#Ignore environments configuration
+src/main/resources/env/config.development.properties
+src/main/resources/env/config.production.properties
+src/main/resources/env/config.testing.properties
+
+# Build application files
+target
+bin
+build
+
+# Ignore eclipse configuration project
+.project
+.settings
+.classpath
+.factorypath
+
+# Visual Studio Code configuration files.
+.vscode
+
+# Intellij Idea IDE configuration files.
+.idea
