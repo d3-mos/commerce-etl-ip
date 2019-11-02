@@ -12,6 +12,30 @@
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 
+  <profiles>
+    <profile>
+      <id>development</id>
+      <properties>
+        <env>development</env>
+      </properties>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+    </profile>
+    <profile>
+      <id>staging</id>
+      <properties>
+        <env>staging</env>
+      </properties>
+    </profile>
+    <profile>
+      <id>production</id>
+      <properties>
+        <env>production</env>
+      </properties>
+    </profile>
+  </profiles>
+
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.8</maven.compiler.source>
@@ -23,11 +47,27 @@
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>4.11</version>
-      <scope>test</scope>
+      <!--<scope>test</scope>-->
     </dependency>
   </dependencies>
 
   <build>
+    <sourceDirectory>src</sourceDirectory>
+    <!-- Loading properties file according with environment profile. -->
+    <filters>
+      <filter>src/main/resources/env/config.${env}.properties</filter>
+    </filters>
+    <!-- Mapping properties file. -->
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <filtering>true</filtering>
+        <includes>
+          <include>*.properties</include>
+        </includes>
+      </resource>
+    </resources>
+
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
       <plugins>
         <!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
