@@ -1,13 +1,22 @@
 package com.globalhitss.claropay.cercademi.commerceetlip;
 
+import com.globalhitss.claropay.cercademi.commerceetlip.appservice.AppProperties;
+import com.globalhitss.claropay.cercademi.commerceetlip.etl.ETLGeoLite;
+
 /**
- * Hello world!
- *
+ * This class represents the main flow of ETL process.
+ * 
+ * @author Ricardo Bermúdez Bermúdez
+ * @version 1.0.0, Nov 4th, 2019.
  */
 public class App 
 {
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
+        try{
+            AppProperties.load();
+            new ETLGeoLite().run();
+        }
+        catch(Exception e){}
     }
 }

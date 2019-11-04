@@ -1,4 +1,4 @@
-package com.globalhitss.claropay.cercademi.commerceetlip.appservices;
+package com.globalhitss.claropay.cercademi.commerceetlip.appservice;
 
 import java.io.IOException;
 import java.util.Properties;
