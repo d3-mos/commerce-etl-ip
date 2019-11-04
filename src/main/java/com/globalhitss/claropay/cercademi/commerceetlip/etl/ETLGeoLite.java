@@ -3,16 +3,13 @@ package com.globalhitss.claropay.cercademi.commerceetlip.etl;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.stream.Stream;
 import static java.lang.Double.parseDouble;
 
 import com.globalhitss.claropay.cercademi.commerceetlip.appservice.AppProperties;
 import com.globalhitss.claropay.cercademi.commerceetlip.model.IPLocation;
-
 import static com.globalhitss.claropay.cercademi.commerceetlip.util.IPTools.generateIpRange;
+
 
 /** */
 public class ETLGeoLite
@@ -47,6 +44,11 @@ public class ETLGeoLite
     });
   }
 
+  public void load(Stream<IPLocation> locations)
+  {
+    
+  }
+
   /** */
   public void run()
   {
@@ -54,9 +56,8 @@ public class ETLGeoLite
       System.out.println("Inicia ETL");
       Stream<String>     rows = extract(AppProperties.get("file.geolite_database"));
       Stream<IPLocation> objs = transform(rows);
+      load(objs);
     }
-    catch(Exception e) { 
-      e.printStackTrace();
-    }
+    catch(Exception e) { e.printStackTrace(); }
   }
 }
