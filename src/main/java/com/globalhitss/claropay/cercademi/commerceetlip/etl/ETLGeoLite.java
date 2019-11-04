@@ -5,8 +5,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.stream.Stream;
 
-import javax.imageio.IIOException;
-
 import com.globalhitss.claropay.cercademi.commerceetlip.appservice.AppProperties;
 
 public class ETLGeoLite
