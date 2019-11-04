@@ -21,10 +21,18 @@ public class ETLGeoLite
       return lines;
   }
 
+  public void transform(Stream<String> rows)
+  {
+    rows.map( row -> {
+       return row;
+    });
+  }
+
   public void run()
   {
     try{
-      extract(AppProperties.get("file.geolite_database"));
+      Stream<String> rows = extract(AppProperties.get("file.geolite_database"));
+      transform(rows);
     }
     catch(IOException e){}
   }
