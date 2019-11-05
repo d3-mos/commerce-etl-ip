@@ -8,31 +8,34 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "ip_cities_final")
+@Table(name = "ip_cities")
 public class IPLocation implements Serializable
 {
   private static final long serialVersionUID = 1L;
 
   @Id
   @Column(name="ip_from")
-  public long   ipFrom     = 0;
+  private long   ipFrom     = 0;
   
   @Id
   @Column(name="ip_to")
-  public long   ipTo       = 0;
+  private long   ipTo       = 0;
 
   @Column(name="latitude")
-  public double latitude   = 0.0;
+  private double latitude   = 0.0;
 
   @Column(name="longitude")
-  public double longitude  = 0.0;
+  private double longitude  = 0.0;
 
   @Column(name="zip_code")
-  public String zipCode    = "";
+  private String zipCode    = "";
 
   @Id
   @Column(name="datasource")
-  public String datasource = "";
+  private String datasource = "";
+
+  @Column(name="noNodes")
+  private long   noNodes    = 0;
 
   public IPLocation(){}
 
@@ -50,6 +53,7 @@ public class IPLocation implements Serializable
       this.longitude  = longitude;
       this.zipCode    = zipCode;
       this.datasource = datasource;
+      this.noNodes    = ipTo - ipFrom;
   }
 
   public long getIpFrom() { return ipFrom; }
@@ -69,4 +73,7 @@ public class IPLocation implements Serializable
 
   public String getDataSource() { return datasource; }
   public void setDataSource(String datasource){ this.datasource = datasource;}
+
+  public long getNoNodes() { return noNodes; }
+  public void setNoNodes(long noNodes){ this.noNodes = noNodes;}
 }
