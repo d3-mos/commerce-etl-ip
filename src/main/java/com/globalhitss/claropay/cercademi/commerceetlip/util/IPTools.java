@@ -1,6 +1,8 @@
 package com.globalhitss.claropay.cercademi.commerceetlip.util;
 
 import java.util.LinkedList;
+import java.util.List;
+
 import static java.lang.Integer.parseInt;
 import static java.lang.Long.parseLong;
 import static java.lang.Integer.toBinaryString;
@@ -24,7 +26,7 @@ public class IPTools
   /** */
   private static String ip2ipBin(String ip)
   {
-    LinkedList<String> octets = new LinkedList<String>();
+    List<String> octets = new LinkedList<String>();
     
     for (String octet : ip.split("\\.")) {
       octets.add( completeByte( toBinaryString( parseInt(octet) ) ) );
@@ -34,10 +36,7 @@ public class IPTools
   }
 
   /** */
-  private static long ipBin2ipNum(String ipBin)
-  {
-    return parseLong(ipBin, 2);
-  }
+  private static long ipBin2ipNum(String ipBin) { return parseLong(ipBin, 2); }
 
   /** */
   private static String fullHost(String ipBin, int cidr, char digit)
@@ -53,7 +52,7 @@ public class IPTools
   /** */
   public static long[] generateIpRange(String ip, int cidr)
   {
-    String ipbin = ip2ipBin(ip);
+    String ipbin  = ip2ipBin(ip);
     long minrange = ipBin2ipNum(fullHost(ipbin, cidr, '0'));
     long maxrange = ipBin2ipNum(fullHost(ipbin, cidr, '1'));
 
