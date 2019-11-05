@@ -26,7 +26,7 @@ public class HibernateConf
     settings.put(Environment.DIALECT, AppProperties.get("hibernate.dialect"));
 
     //settings.put("hibernate.id.new_generator_mappings", "false");  
-    settings.put(Environment.SHOW_SQL, "true");
+    settings.put(Environment.SHOW_SQL, AppProperties.get("hibernate.show_sql"));
     settings.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
     settings.put(Environment.HBM2DDL_AUTO, "create-drop");
 

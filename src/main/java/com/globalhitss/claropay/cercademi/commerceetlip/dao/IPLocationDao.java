@@ -1,5 +1,6 @@
 package com.globalhitss.claropay.cercademi.commerceetlip.dao;
 
+import java.util.List;
 import java.util.stream.Stream;
 
 import com.globalhitss.claropay.cercademi.commerceetlip.config.HibernateConf;
@@ -21,12 +22,20 @@ public class IPLocationDao
   
 
   /** */
-  public Stream<IPLocation> insert(Stream<IPLocation> ipList)
+  public List<IPLocation> insert(List<IPLocation> ipList)
   {
     try (Session session = getSession()) {
-      ipList.forEach( ipLocation -> session.persist(ipLocation) );
+      try {
+        session.beginTransaction();
+        ipList.forEach( ipLocation -> session.save(ipLocation));
+        session.getTransaction().commit();
+      } catch (Exception e) {
+        if (session.getTransaction() != null) { 
+          session.getTransaction().rollback();
+        }
+      }
     }
-    catch(Exception e){ e.printStackTrace(); }
+    catch(Exception e){ }
     
     return ipList;
   }
