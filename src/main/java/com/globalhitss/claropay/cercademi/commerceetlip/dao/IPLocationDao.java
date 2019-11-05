@@ -1,7 +1,6 @@
 package com.globalhitss.claropay.cercademi.commerceetlip.dao;
 
 import java.util.List;
-import java.util.stream.Stream;
 
 import com.globalhitss.claropay.cercademi.commerceetlip.config.HibernateConf;
 import com.globalhitss.claropay.cercademi.commerceetlip.model.IPLocation;
