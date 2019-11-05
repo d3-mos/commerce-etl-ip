@@ -7,6 +7,7 @@ import java.util.stream.Stream;
 import static java.lang.Double.parseDouble;
 
 import com.globalhitss.claropay.cercademi.commerceetlip.appservice.AppProperties;
+import com.globalhitss.claropay.cercademi.commerceetlip.dao.IPLocationDao;
 import com.globalhitss.claropay.cercademi.commerceetlip.model.IPLocation;
 import static com.globalhitss.claropay.cercademi.commerceetlip.util.IPTools.generateIpRange;
 
@@ -39,14 +40,15 @@ public class ETLGeoLite
         iprange[1],
         parseDouble(rowFields[7]),
         parseDouble(rowFields[8]),
-        rowFields[7]
+        rowFields[7],
+        "geolite"
       );
     });
   }
 
   public void load(Stream<IPLocation> locations)
   {
-    
+    new IPLocationDao().insert(locations);
   }
 
   /** */

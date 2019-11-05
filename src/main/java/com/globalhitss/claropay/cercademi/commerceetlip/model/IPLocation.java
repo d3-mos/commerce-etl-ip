@@ -1,16 +1,23 @@
 package com.globalhitss.claropay.cercademi.commerceetlip.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "ip_cities_final")
-public class IPLocation
+public class IPLocation implements Serializable
 {
+  private static final long serialVersionUID = 1L;
+
+  @Id
   @Column(name="ip_from")
   public long   ipFrom     = 0;
   
+  @Id
   @Column(name="ip_to")
   public long   ipTo       = 0;
 
@@ -23,6 +30,10 @@ public class IPLocation
   @Column(name="zip_code")
   public String zipCode    = "";
 
+  @Id
+  @Column(name="datasource")
+  public String datasource = "";
+
   public IPLocation(){}
 
   public IPLocation(
@@ -30,13 +41,15 @@ public class IPLocation
     long ipTo,
     double latitude,
     double longitude,
-    String zipCode
+    String zipCode,
+    String datasource
   ) {
-      this.ipFrom    = ipFrom;
-      this.ipTo      = ipTo;
-      this.latitude  = latitude;
-      this.longitude = longitude;
-      this.zipCode   = zipCode;
+      this.ipFrom     = ipFrom;
+      this.ipTo       = ipTo;
+      this.latitude   = latitude;
+      this.longitude  = longitude;
+      this.zipCode    = zipCode;
+      this.datasource = datasource;
   }
 
   public long getIpFrom() { return ipFrom; }
@@ -53,4 +66,7 @@ public class IPLocation
 
   public String getZipCode() { return zipCode; }
   public void setZipCode(String zipCode){ this.zipCode = zipCode;}
+
+  public String getDataSource() { return datasource; }
+  public void setDataSource(String datasource){ this.datasource = datasource;}
 }
