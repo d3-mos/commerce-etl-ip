@@ -1,19 +1,16 @@
 package com.globalhitss.claropay.cercademi.commerceetlip.etl;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 import static java.lang.Double.parseDouble;
 
-import org.apache.commons.io.FileUtils;
 
 import com.globalhitss.claropay.cercademi.commerceetlip.appservice.AppProperties;
 import com.globalhitss.claropay.cercademi.commerceetlip.dao.IPLocationDao;
 import com.globalhitss.claropay.cercademi.commerceetlip.model.IPLocation;
-import com.globalhitss.claropay.cercademi.commerceetlip.util.FileTools;
 import static com.globalhitss.claropay.cercademi.commerceetlip.util.IPTools.generateIpRange;
 
 
