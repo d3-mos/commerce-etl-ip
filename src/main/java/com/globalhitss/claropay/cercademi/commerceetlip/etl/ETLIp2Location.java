@@ -11,9 +11,24 @@ import static java.lang.Long.parseLong;
 import com.globalhitss.claropay.cercademi.commerceetlip.appservice.AppProperties;
 import com.globalhitss.claropay.cercademi.commerceetlip.dao.IPLocationDao;
 import com.globalhitss.claropay.cercademi.commerceetlip.model.IPLocation;
+import com.globalhitss.claropay.cercademi.commerceetlip.util.FileTools;
 
 public class ETLIp2Location
 {
+  public String fetch(String URL, String file, String focusFile) 
+    throws Exception
+  {
+    FileTools fileTools = new FileTools();
+    fileTools.download(URL, file);
+    
+    return fileTools
+      .unzip(file, file + ".d")
+      .stream()
+      .filter(fileElement -> fileElement.matches(".*"+focusFile+"$"))
+      .findAny()
+      .orElse("");
+  }
+
   public List<String> extract(String path)
     throws IOException
   {
@@ -60,7 +75,8 @@ public class ETLIp2Location
   {
     try{
       System.out.println("Inicia ETL");
-      List<String> rows = extract(AppProperties.get("file.ip2location_database"));
+      String path = fetch(AppProperties.get("file.ip2location_database"),"ip2location.zip", "IP2LOCATION-LITE-DB9.CSV");
+      List<String> rows = extract(path);
       System.out.println(" - Termina extracción: " + rows.size());
       List<IPLocation> objs = transform(rows);
       System.out.println(" - Termina transformación: " + objs.size());

@@ -2,7 +2,7 @@ package com.globalhitss.claropay.cercademi.commerceetlip;
 
 import com.globalhitss.claropay.cercademi.commerceetlip.appservice.AppProperties;
 import com.globalhitss.claropay.cercademi.commerceetlip.etl.ETLGeoLite;
-//import com.globalhitss.claropay.cercademi.commerceetlip.etl.ETLIp2Location;
+import com.globalhitss.claropay.cercademi.commerceetlip.etl.ETLIp2Location;
 
 /**
  * This class represents the main flow of ETL process.
@@ -18,7 +18,7 @@ public class App
             AppProperties.load();
             
             new ETLGeoLite().run();
-            //new ETLIp2Location().run();
+            new ETLIp2Location().run();
         }
         catch(Exception e){}
     }

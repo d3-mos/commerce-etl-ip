@@ -28,7 +28,7 @@ public class ETLGeoLite
     return fileTools
       .unzip(file, file + ".d")
       .stream()
-      .filter(fileElement -> fileElement.matches(".*"+focusFile+".*"))
+      .filter(fileElement -> fileElement.matches(".*"+focusFile+"$"))
       .findAny()
       .orElse("");
   }
