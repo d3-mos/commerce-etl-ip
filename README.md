@@ -1,6 +1,6 @@
 # IP Geolocation ETL
 
-This architectural component represents the ETL process to fetch databases with "IP - Geolocation" relation registers. The goal of this component is provide the data for make available a non-intrusive method to locate an user by your device IP.
+This architectural component represents the ETL process to fetch databases with "IP - Geolocation" relation registers. The goal of this component is provide the data for make available a non-intrusive method to locate an user by your device IP. At this time this project use two "IP-Geolocation" databases: Geolite and IP2Location.
 
 ## 1. Requirements
 
@@ -9,7 +9,7 @@ The next tools are needs to run this project, install all tools according with t
  - [Apache Maven 3.6.2](https://maven.apache.org/)
  - [Java 1.8.*](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
  - IDE Text Editor
- - [Google Maps API Key](https://developers.google.com/maps/documentation/javascript/get-api-key)
+ - [IP2Location API key](https://lite.ip2location.com/sign-up?ref=DB1)
  - [Docker >=18.03.0-ce](https://runnable.com/docker/getting-started/)
 
 ## 2. Installation
@@ -84,7 +84,7 @@ IP2Location documentation:
 Geolite documentation:
 
  - [Geolite main page](https://dev.maxmind.com/geoip/geoip2/geolite2/)
- 
+
 ## 4. Developers team.
 
  Software Developer: Ricardo Bermúdez Bermúdez
