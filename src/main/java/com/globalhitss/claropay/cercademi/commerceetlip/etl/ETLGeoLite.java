@@ -1,45 +1,30 @@
 package com.globalhitss.claropay.cercademi.commerceetlip.etl;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 import static java.lang.Double.parseDouble;
 
-import org.apache.commons.io.FileUtils;
 
 import com.globalhitss.claropay.cercademi.commerceetlip.appservice.AppProperties;
 import com.globalhitss.claropay.cercademi.commerceetlip.dao.IPLocationDao;
 import com.globalhitss.claropay.cercademi.commerceetlip.model.IPLocation;
-import com.globalhitss.claropay.cercademi.commerceetlip.util.FileTools;
 import static com.globalhitss.claropay.cercademi.commerceetlip.util.IPTools.generateIpRange;
 
 
 /** */
-public class ETLGeoLite
+public class ETLGeoLite extends ETL<String, IPLocation>
 {
 
-  public void deleteJunkFiles(String fileName)
-    throws IOException
+  /** */
+  public ETLGeoLite()
   {
-    FileUtils.deleteDirectory(new File(fileName + ".d"));
-    new File(fileName).delete();
-  }
-
-  public String fetch(String URL, String file, String focusFile) 
-    throws Exception
-  {
-    FileTools fileTools = new FileTools();
-    fileTools.download(URL, file);
-    
-    return fileTools
-      .unzip(file, file + ".d")
-      .stream()
-      .filter(fileElement -> fileElement.matches(".*"+focusFile+"$"))
-      .findAny()
-      .orElse("");
+    super(
+      AppProperties.get("file.geolite_database"),
+      "GeoLite2-City-Blocks-IPv4.csv"
+    );
   }
 
   /** */
@@ -53,6 +38,7 @@ public class ETLGeoLite
       .skip(1)
       .filter(line -> line.matches(".*3996063.*"))
       .collect(Collectors.toList());
+    
     csvFile.close();
 
     return lines;
@@ -82,27 +68,9 @@ public class ETLGeoLite
     .collect(Collectors.toList());
   }
 
+  /** */
   public void load(List<IPLocation> locations)
   {
     new IPLocationDao().insert(locations);
-  }
-
-  /** */
-  public void run()
-  {
-    try {
-      System.out.println("Inicia ETL");
-      String path = fetch(AppProperties.get("file.geolite_database"),"geolite.zip", "GeoLite2-City-Blocks-IPv4.csv");
-      System.out.println(" - Termina descarga. ");
-      List<String>     rows = extract(path);
-      System.out.println(" - Termina extracción: " + rows.size());
-      List<IPLocation> objs = transform(rows);
-      System.out.println(" - Termina transformación: " + objs.size());
-      load(objs);
-      System.out.println(" - Termina carga");
-      deleteJunkFiles("geolite.zip");
-      System.out.println("Archivos basura eliminados");
-    }
-    catch(Exception e) { e.printStackTrace(); }
   }
 }
