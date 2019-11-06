@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
+import org.apache.commons.io.FileUtils;
+
 
 /**
  * https://www.baeldung.com/java-compress-and-uncompress
@@ -18,9 +20,30 @@ import java.util.zip.ZipInputStream;
  */
 public class FileTools
 {
+ 
+  /** */
+  public static void deleteJunkFiles(String fileName)
+    throws IOException
+  {
+    FileUtils.deleteDirectory(new File(fileName + ".d"));
+    new File(fileName).delete();
+  }
   
   /** */
-  public void download(String fileURI, String fileName)
+  public static String downloadAndUnzip(String URL, String file, String focusFile) 
+    throws Exception
+  {
+    download(URL, file);
+    
+    return unzip(file, file + ".d")
+      .stream()
+      .filter(fileElement -> fileElement.matches(".*"+focusFile+"$"))
+      .findAny()
+      .orElse("");
+  }
+
+  /** */
+  public static void download(String fileURI, String fileName)
     throws IOException
   { 
     BufferedInputStream in = new BufferedInputStream(new URL(fileURI).openStream());
@@ -36,7 +59,7 @@ public class FileTools
   }
 
   /** */
-  public List<String> unzip(final String fileZip, final String path)
+  public static List<String> unzip(final String fileZip, final String path)
     throws IOException 
   {
     final File destDir  = new File(path);
@@ -69,7 +92,7 @@ public class FileTools
   /**
    * @see https://snyk.io/research/zip-slip-vulnerability
    */
-  public File newFile(File destinationDir, ZipEntry zipEntry)
+  public static File newFile(File destinationDir, ZipEntry zipEntry)
     throws IOException
   {
     File destFile = new File(destinationDir, zipEntry.getName());
