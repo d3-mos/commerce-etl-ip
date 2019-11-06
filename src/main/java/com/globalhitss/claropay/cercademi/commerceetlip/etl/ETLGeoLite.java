@@ -19,12 +19,18 @@ import static com.globalhitss.claropay.cercademi.commerceetlip.util.IPTools.gene
 public class ETLGeoLite
 {
 
-  public void fetch(String URL, String file) 
+  public String fetch(String URL, String file, String focusFile) 
     throws Exception
   {
     FileTools fileTools = new FileTools();
     fileTools.download(URL, file);
-    fileTools.unzip(file, file + ".d");
+    
+    return fileTools
+      .unzip(file, file + ".d")
+      .stream()
+      .filter(fileElement -> fileElement.matches(".*"+focusFile+".*"))
+      .findAny()
+      .orElse("");
   }
 
   /** */
@@ -77,9 +83,9 @@ public class ETLGeoLite
   {
     try {
       System.out.println("Inicia ETL");
-      fetch(AppProperties.get("file.geolite_database"),"geolite.zip");
+      String path = fetch(AppProperties.get("file.geolite_database"),"geolite.zip", "GeoLite2-City-Blocks-IPv4.csv");
       System.out.println(" - Termina descarga. ");
-      List<String>     rows = extract("geolite.zip.d/GeoLite2-City-CSV_20191029/GeoLite2-City-Blocks-IPv4.csv");
+      List<String>     rows = extract(path);
       System.out.println(" - Termina extracción: " + rows.size());
       List<IPLocation> objs = transform(rows);
       System.out.println(" - Termina transformación: " + objs.size());

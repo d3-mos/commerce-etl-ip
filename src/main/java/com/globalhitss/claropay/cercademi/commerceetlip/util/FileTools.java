@@ -6,6 +6,8 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -29,10 +31,12 @@ public class FileTools
     while ((bytesRead = in.read(dataBuffer, 0, 1024)) != -1) {
       fileOutputStream.write(dataBuffer, 0, bytesRead);
     }
+
+    fileOutputStream.close();
   }
 
   /** */
-  public void unzip(final String fileZip, final String path)
+  public List<String> unzip(final String fileZip, final String path)
     throws IOException 
   {
     final File destDir = new File(path);
@@ -40,12 +44,14 @@ public class FileTools
     final ZipInputStream zis = new ZipInputStream(
       new FileInputStream(fileZip)
     );
-    
+    List<String> dirs = new LinkedList<String>();
+
     ZipEntry zipEntry = zis.getNextEntry();
     while (zipEntry != null) {
       final File newFile = newFile(destDir, zipEntry);
       new File(newFile.getParent()).mkdirs(); // [1]
       final FileOutputStream fos = new FileOutputStream(newFile);
+      dirs.add(newFile.getPath());
       
       int len;
       while ((len = zis.read(buffer)) > 0) {
@@ -56,6 +62,8 @@ public class FileTools
     }
     zis.closeEntry();
     zis.close();
+
+    return dirs;
   }
     
   /**
