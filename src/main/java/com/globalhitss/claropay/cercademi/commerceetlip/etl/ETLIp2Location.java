@@ -1,6 +1,7 @@
 package com.globalhitss.claropay.cercademi.commerceetlip.etl;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
@@ -13,16 +14,25 @@ import com.globalhitss.claropay.cercademi.commerceetlip.dao.IPLocationDao;
 import com.globalhitss.claropay.cercademi.commerceetlip.model.IPLocation;
 import com.globalhitss.claropay.cercademi.commerceetlip.util.FileTools;
 
+import org.apache.commons.io.FileUtils;
+
 public class ETLIp2Location
 {
-  public String fetch(String URL, String file, String focusFile) 
+  public void deleteJunkFiles(String fileName)
+    throws IOException
+  {
+    FileUtils.deleteDirectory(new File(fileName + ".d"));
+    new File(fileName).delete() ;
+  }
+
+  public String fetch(String URL, String fileName, String focusFile) 
     throws Exception
   {
     FileTools fileTools = new FileTools();
-    fileTools.download(URL, file);
+    fileTools.download(URL, fileName);
     
     return fileTools
-      .unzip(file, file + ".d")
+      .unzip(fileName, fileName + ".d")
       .stream()
       .filter(fileElement -> fileElement.matches(".*"+focusFile+"$"))
       .findAny()
@@ -76,13 +86,15 @@ public class ETLIp2Location
     try{
       System.out.println("Inicia ETL");
       String path = fetch(AppProperties.get("file.ip2location_database"),"ip2location.zip", "IP2LOCATION-LITE-DB9.CSV");
+      System.out.println("Termina descarga. ");
       List<String> rows = extract(path);
       System.out.println(" - Termina extracción: " + rows.size());
       List<IPLocation> objs = transform(rows);
       System.out.println(" - Termina transformación: " + objs.size());
       load(objs);
       System.out.println(" - Termina carga");
-      
+      deleteJunkFiles("ip2location.zip");
+      System.out.println("Archivos basura eliminados");
     }catch(Exception e){}
   }
 }

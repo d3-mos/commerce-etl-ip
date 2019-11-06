@@ -39,7 +39,7 @@ public class FileTools
   public List<String> unzip(final String fileZip, final String path)
     throws IOException 
   {
-    final File destDir = new File(path);
+    final File destDir  = new File(path);
     final byte[] buffer = new byte[1024];
     final ZipInputStream zis = new ZipInputStream(
       new FileInputStream(fileZip)
