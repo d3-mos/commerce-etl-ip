@@ -12,6 +12,7 @@ import java.util.zip.ZipInputStream;
 
 /**
  * https://www.baeldung.com/java-compress-and-uncompress
+ * https://github.com/eugenp/tutorials/blob/master/core-java-modules/core-java-io/src/main/java/com/baeldung/unzip/UnzipFile.java
  */
 public class FileTools
 {
