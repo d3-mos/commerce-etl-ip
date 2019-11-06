@@ -8,6 +8,9 @@ target
 bin
 build
 
+# Runtime application files
+ETL*
+
 # Ignore eclipse configuration project
 .project
 .settings
