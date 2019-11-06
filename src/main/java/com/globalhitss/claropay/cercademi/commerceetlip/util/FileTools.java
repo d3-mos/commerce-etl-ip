@@ -1,3 +1,5 @@
+package com.globalhitss.claropay.cercademi.commerceetlip.util;
+
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -18,7 +20,7 @@ public class FileTools
   public void download(String fileURI, String fileName)
     throws IOException
   { 
-    BufferedInputStream in = new BufferedInputStream(new URL(fileURI).openStream();
+    BufferedInputStream in = new BufferedInputStream(new URL(fileURI).openStream());
     FileOutputStream fileOutputStream = new FileOutputStream(fileName);
     byte dataBuffer[] = new byte[1024];
     int bytesRead;

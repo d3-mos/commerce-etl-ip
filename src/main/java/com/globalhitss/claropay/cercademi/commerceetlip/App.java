@@ -18,7 +18,7 @@ public class App
             AppProperties.load();
             
             new ETLGeoLite().run();
-            new ETLIp2Location().run();
+            //new ETLIp2Location().run();
         }
         catch(Exception e){}
     }

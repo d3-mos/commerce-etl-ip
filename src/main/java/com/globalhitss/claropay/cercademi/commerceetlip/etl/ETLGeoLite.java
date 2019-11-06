@@ -10,12 +10,22 @@ import static java.lang.Double.parseDouble;
 import com.globalhitss.claropay.cercademi.commerceetlip.appservice.AppProperties;
 import com.globalhitss.claropay.cercademi.commerceetlip.dao.IPLocationDao;
 import com.globalhitss.claropay.cercademi.commerceetlip.model.IPLocation;
+import com.globalhitss.claropay.cercademi.commerceetlip.util.FileTools;
+
 import static com.globalhitss.claropay.cercademi.commerceetlip.util.IPTools.generateIpRange;
 
 
 /** */
 public class ETLGeoLite
 {
+
+  public void fetch(String URL, String file) 
+    throws Exception
+  {
+    FileTools fileTools = new FileTools();
+    fileTools.download(URL, file);
+    fileTools.unzip(file, file + ".d");
+  }
 
   /** */
   public List<String> extract(String path)
@@ -67,7 +77,9 @@ public class ETLGeoLite
   {
     try {
       System.out.println("Inicia ETL");
-      List<String>     rows = extract(AppProperties.get("file.geolite_database"));
+      fetch(AppProperties.get("file.geolite_database"),"geolite.zip");
+      System.out.println(" - Termina descarga. ");
+      List<String>     rows = extract("geolite.zip.d/GeoLite2-City-CSV_20191029/GeoLite2-City-Blocks-IPv4.csv");
       System.out.println(" - Termina extracción: " + rows.size());
       List<IPLocation> objs = transform(rows);
       System.out.println(" - Termina transformación: " + objs.size());
