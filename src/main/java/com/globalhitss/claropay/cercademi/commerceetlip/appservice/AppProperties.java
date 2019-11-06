@@ -43,8 +43,5 @@ public class AppProperties
    * @return A string with value associated to key property when key isn't
    *         available returns a empty string.
    */
-  public static String get(String key)
-  {
-    return envProps.getProperty(key, "");
-  }
+  public static String get(String key){ return envProps.getProperty(key, ""); }
 }
