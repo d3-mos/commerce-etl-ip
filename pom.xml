@@ -8,9 +8,7 @@
   <artifactId>ipgeolocation</artifactId>
   <version>0.0.1</version>
 
-  <name>commerceetlip</name>
-  <!-- FIXME change it to the project's website -->
-  <url>http://www.example.com</url>
+  <name>job.networkgeolocation</name>
 
   <profiles>
     <profile>
