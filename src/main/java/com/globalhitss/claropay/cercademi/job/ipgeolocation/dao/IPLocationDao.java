@@ -1,12 +1,12 @@
-package com.globalhitss.claropay.cercademi.commerceetlip.dao;
+package com.globalhitss.claropay.cercademi.job.ipgeolocation.dao;
 
 import java.util.List;
 
-import com.globalhitss.claropay.cercademi.commerceetlip.config.HibernateConf;
-import com.globalhitss.claropay.cercademi.commerceetlip.model.IPLocation;
-
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+
+import com.globalhitss.claropay.cercademi.job.ipgeolocation.config.HibernateConf;
+import com.globalhitss.claropay.cercademi.job.ipgeolocation.model.IPLocation;
 
 /** */
 public class IPLocationDao

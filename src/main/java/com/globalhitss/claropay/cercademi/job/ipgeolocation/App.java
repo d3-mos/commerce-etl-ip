@@ -1,8 +1,8 @@
-package com.globalhitss.claropay.cercademi.commerceetlip;
+package com.globalhitss.claropay.cercademi.job.ipgeolocation;
 
-import com.globalhitss.claropay.cercademi.commerceetlip.appservice.AppProperties;
-import com.globalhitss.claropay.cercademi.commerceetlip.etl.ETLGeoLite;
-import com.globalhitss.claropay.cercademi.commerceetlip.etl.ETLIp2Location;
+import com.globalhitss.claropay.cercademi.job.ipgeolocation.appservice.AppProperties;
+import com.globalhitss.claropay.cercademi.job.ipgeolocation.etl.ETLGeoLite;
+import com.globalhitss.claropay.cercademi.job.ipgeolocation.etl.ETLIp2Location;
 
 /**
  * This class represents the main flow of ETL process.

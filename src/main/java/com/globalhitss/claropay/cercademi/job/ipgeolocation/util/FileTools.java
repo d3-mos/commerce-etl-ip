@@ -1,4 +1,4 @@
-package com.globalhitss.claropay.cercademi.commerceetlip.util;
+package com.globalhitss.claropay.cercademi.job.ipgeolocation.util;
 
 import java.io.BufferedInputStream;
 import java.io.File;

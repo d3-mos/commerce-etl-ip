@@ -1,4 +1,4 @@
-package com.globalhitss.claropay.cercademi.commerceetlip.model;
+package com.globalhitss.claropay.cercademi.job.ipgeolocation.model;
 
 import java.io.Serializable;
 

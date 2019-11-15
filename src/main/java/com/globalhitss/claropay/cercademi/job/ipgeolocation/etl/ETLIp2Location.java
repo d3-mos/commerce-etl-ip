@@ -1,16 +1,17 @@
-package com.globalhitss.claropay.cercademi.commerceetlip.etl;
+package com.globalhitss.claropay.cercademi.job.ipgeolocation.etl;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import com.globalhitss.claropay.cercademi.job.ipgeolocation.appservice.AppProperties;
+import com.globalhitss.claropay.cercademi.job.ipgeolocation.dao.IPLocationDao;
+import com.globalhitss.claropay.cercademi.job.ipgeolocation.model.IPLocation;
+
 import static java.lang.Double.parseDouble;
 import static java.lang.Long.parseLong;
-
-import com.globalhitss.claropay.cercademi.commerceetlip.appservice.AppProperties;
-import com.globalhitss.claropay.cercademi.commerceetlip.dao.IPLocationDao;
-import com.globalhitss.claropay.cercademi.commerceetlip.model.IPLocation;
 
 
 /** */

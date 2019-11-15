@@ -1,14 +1,14 @@
-package com.globalhitss.claropay.cercademi.commerceetlip.config;
+package com.globalhitss.claropay.cercademi.job.ipgeolocation.config;
 
 import java.util.Properties;
-
-import com.globalhitss.claropay.cercademi.commerceetlip.appservice.AppProperties;
-import com.globalhitss.claropay.cercademi.commerceetlip.model.IPLocation;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.Environment;
+
+import com.globalhitss.claropay.cercademi.job.ipgeolocation.appservice.AppProperties;
+import com.globalhitss.claropay.cercademi.job.ipgeolocation.model.IPLocation;
 
 public class HibernateConf
 {

@@ -1,10 +1,10 @@
-package com.globalhitss.claropay.cercademi.commerceetlip.etl;
+package com.globalhitss.claropay.cercademi.job.ipgeolocation.etl;
+
+import static com.globalhitss.claropay.cercademi.job.ipgeolocation.util.FileTools.deleteJunkFiles;
+import static com.globalhitss.claropay.cercademi.job.ipgeolocation.util.FileTools.downloadAndUnzip;
 
 import java.io.IOException;
 import java.util.List;
-
-import static com.globalhitss.claropay.cercademi.commerceetlip.util.FileTools.downloadAndUnzip;
-import static com.globalhitss.claropay.cercademi.commerceetlip.util.FileTools.deleteJunkFiles;
 
 abstract public class ETL<Origin, Destination>
 {
