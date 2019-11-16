@@ -5,12 +5,10 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.globalhitss.claropay.cercademi</groupId>
-  <artifactId>commerceetlip</artifactId>
+  <artifactId>job.networkgeolocation</artifactId>
   <version>0.0.1</version>
 
-  <name>commerceetlip</name>
-  <!-- FIXME change it to the project's website -->
-  <url>http://www.example.com</url>
+  <name>job.networkgeolocation</name>
 
   <profiles>
     <profile>
@@ -143,7 +141,7 @@
           <artifactId>exec-maven-plugin</artifactId>
           <version>1.6.0</version>
           <configuration>
-            <mainClass>com.globalhitss.claropay.cercademi.commerceetlip.App</mainClass>
+            <mainClass>com.globalhitss.claropay.cercademi.job.networkgeolocation.App</mainClass>
           </configuration>
         </plugin>
       </plugins>

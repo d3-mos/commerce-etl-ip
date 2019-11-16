@@ -1,14 +1,13 @@
-package com.globalhitss.claropay.cercademi.commerceetlip.config;
+package com.globalhitss.claropay.cercademi.job.networkgeolocation.config;
 
 import java.util.Properties;
-
-import com.globalhitss.claropay.cercademi.commerceetlip.appservice.AppProperties;
-import com.globalhitss.claropay.cercademi.commerceetlip.model.IPLocation;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.Environment;
+
+import com.globalhitss.claropay.cercademi.job.networkgeolocation.model.NetworkGeolocation;
 
 public class HibernateConf
 {
@@ -25,10 +24,11 @@ public class HibernateConf
     settings.put(Environment.PASS,    AppProperties.get("datasource.password"));
     settings.put(Environment.DIALECT, AppProperties.get("hibernate.dialect"));
 
-    //settings.put("hibernate.id.new_generator_mappings", "false");
     settings.put(Environment.SHOW_SQL, AppProperties.get("hibernate.show_sql"));
     settings.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
-    settings.put(Environment.HBM2DDL_AUTO, "create-drop");
+    // settings.put("hibernate.id.new_generator_mappings", "false");
+    // Uncomment the below line to create database with ETL job procedure.
+    // settings.put(Environment.HBM2DDL_AUTO, "create-drop");
 
     return settings;
   }
@@ -36,7 +36,7 @@ public class HibernateConf
   /** */
   public static void addAnnotatedClasses(Configuration conf)
   {
-    conf.addAnnotatedClass(IPLocation.class);
+    conf.addAnnotatedClass(NetworkGeolocation.class);
   }
 
   /** */

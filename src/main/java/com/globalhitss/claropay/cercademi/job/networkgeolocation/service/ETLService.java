@@ -1,18 +1,18 @@
-package com.globalhitss.claropay.cercademi.commerceetlip.etl;
+package com.globalhitss.claropay.cercademi.job.networkgeolocation.service;
+
+import static com.globalhitss.claropay.cercademi.job.networkgeolocation.util.FileTools.deleteJunkFiles;
+import static com.globalhitss.claropay.cercademi.job.networkgeolocation.util.FileTools.downloadAndUnzip;
 
 import java.io.IOException;
 import java.util.List;
 
-import static com.globalhitss.claropay.cercademi.commerceetlip.util.FileTools.downloadAndUnzip;
-import static com.globalhitss.claropay.cercademi.commerceetlip.util.FileTools.deleteJunkFiles;
-
-abstract public class ETL<Origin, Destination>
+abstract public class ETLService<Origin, Destination>
 {
   private String uriFile          = "";
   private String etlClassName     = "";
   private String searchedFileName = "";
 
-  public ETL(String uriFile, String searchedFileName)
+  public ETLService(String uriFile, String searchedFileName)
   {
     this.uriFile = uriFile;
     this.searchedFileName = searchedFileName;
@@ -44,7 +44,10 @@ abstract public class ETL<Origin, Destination>
 
       load(objs);
       log("Termina carga");
-
+    }
+    catch(Exception e) { e.printStackTrace(); }
+    
+    try {
       deleteJunkFiles(etlClassName);
       log("Archivos temporales eliminados");
     }

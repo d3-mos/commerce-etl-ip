@@ -1,4 +1,4 @@
-package com.globalhitss.claropay.cercademi.commerceetlip.util;
+package com.globalhitss.claropay.cercademi.job.networkgeolocation.util;
 
 import java.util.LinkedList;
 import java.util.List;

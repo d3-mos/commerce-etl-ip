@@ -1,45 +1,55 @@
-package com.globalhitss.claropay.cercademi.commerceetlip.model;
+package com.globalhitss.claropay.cercademi.job.networkgeolocation.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
-@Table(name = "ip_cities")
-public class IPLocation implements Serializable
+@Table(name = "CAT_NETWORK_GEOLOCATION")
+public class NetworkGeolocation implements Serializable
 {
   private static final long serialVersionUID = 1L;
 
   @Id
-  @Column(name="ip_from")
+  @Column(name="IP_FROM")
   private long   ipFrom     = 0;
   
   @Id
-  @Column(name="ip_to")
+  @Column(name="IP_TO")
   private long   ipTo       = 0;
 
-  @Column(name="latitude")
+  @Column(name="LATITUDE")
   private double latitude   = 0.0;
 
-  @Column(name="longitude")
+  @Column(name="LONGITUDE")
   private double longitude  = 0.0;
 
-  @Column(name="zip_code")
+  @Column(name="ZIP_CODE")
   private String zipCode    = "";
 
   @Id
-  @Column(name="datasource")
+  @Column(name="DATASOURCE")
   private String datasource = "";
 
-  @Column(name="noNodes")
+  @Column(name="NO_NODES")
   private long   noNodes    = 0;
+  
+  @Column(name="MODIFY_TS")
+  @UpdateTimestamp
+  @Temporal(TemporalType.TIMESTAMP)
+  private Date modifyTs;
 
-  public IPLocation(){}
+  public NetworkGeolocation(){}
 
-  public IPLocation(
+  public NetworkGeolocation(
     long ipFrom,
     long ipTo,
     double latitude,
@@ -76,4 +86,7 @@ public class IPLocation implements Serializable
 
   public long getNoNodes() { return noNodes; }
   public void setNoNodes(long noNodes){ this.noNodes = noNodes;}
+  
+  public Date getModifyTs() { return modifyTs; }
+  public void setModifyTs(Date modifyTs) { this.modifyTs = modifyTs; }
 }

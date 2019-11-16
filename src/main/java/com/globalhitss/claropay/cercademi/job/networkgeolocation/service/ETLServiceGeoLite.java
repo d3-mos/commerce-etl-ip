@@ -1,25 +1,25 @@
-package com.globalhitss.claropay.cercademi.commerceetlip.etl;
+package com.globalhitss.claropay.cercademi.job.networkgeolocation.service;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import com.globalhitss.claropay.cercademi.job.networkgeolocation.config.AppProperties;
+import com.globalhitss.claropay.cercademi.job.networkgeolocation.dao.NetworkGeolocationSQLDao;
+import com.globalhitss.claropay.cercademi.job.networkgeolocation.model.NetworkGeolocation;
+
+import static com.globalhitss.claropay.cercademi.job.networkgeolocation.util.IPTools.generateIpRange;
 import static java.lang.Double.parseDouble;
 
 
-import com.globalhitss.claropay.cercademi.commerceetlip.appservice.AppProperties;
-import com.globalhitss.claropay.cercademi.commerceetlip.dao.IPLocationDao;
-import com.globalhitss.claropay.cercademi.commerceetlip.model.IPLocation;
-import static com.globalhitss.claropay.cercademi.commerceetlip.util.IPTools.generateIpRange;
-
-
 /** */
-public class ETLGeoLite extends ETL<String, IPLocation>
+public class ETLServiceGeoLite extends ETLService<String, NetworkGeolocation>
 {
 
   /** */
-  public ETLGeoLite()
+  public ETLServiceGeoLite()
   {
     super(
       AppProperties.get("file.geolite_database"),
@@ -45,14 +45,14 @@ public class ETLGeoLite extends ETL<String, IPLocation>
   }
 
   /** */
-  public List<IPLocation> transform(List<String> rows)
+  public List<NetworkGeolocation> transform(List<String> rows)
   {
     return rows.stream().map( row -> {
       try {
         String[] rowFields = row.split(",");
         long[]   iprange   = generateIpRange(rowFields[0].split("/"));
 
-        return new IPLocation(
+        return new NetworkGeolocation(
           iprange[0],
           iprange[1],
           parseDouble(rowFields[7]),
@@ -69,8 +69,8 @@ public class ETLGeoLite extends ETL<String, IPLocation>
   }
 
   /** */
-  public void load(List<IPLocation> locations)
+  public void load(List<NetworkGeolocation> locations)
   {
-    new IPLocationDao().insert(locations);
+    new NetworkGeolocationSQLDao().upgrade(locations, "geolite");
   }
 }
