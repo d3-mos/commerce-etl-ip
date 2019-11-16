@@ -1,4 +1,4 @@
-package com.globalhitss.claropay.cercademi.job.ipgeolocation.appservice;
+package com.globalhitss.claropay.cercademi.job.networkgeolocation.config;
 
 import java.io.IOException;
 import java.util.Properties;

@@ -1,4 +1,4 @@
-package com.globalhitss.claropay.cercademi.job.ipgeolocation.etl;
+package com.globalhitss.claropay.cercademi.job.networkgeolocation.service;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -6,20 +6,20 @@ import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.globalhitss.claropay.cercademi.job.ipgeolocation.appservice.AppProperties;
-import com.globalhitss.claropay.cercademi.job.ipgeolocation.dao.IPLocationDao;
-import com.globalhitss.claropay.cercademi.job.ipgeolocation.model.IPLocation;
+import com.globalhitss.claropay.cercademi.job.networkgeolocation.config.AppProperties;
+import com.globalhitss.claropay.cercademi.job.networkgeolocation.dao.NetworkGeolocationSQLDao;
+import com.globalhitss.claropay.cercademi.job.networkgeolocation.model.NetworkGeolocation;
 
 import static java.lang.Double.parseDouble;
 import static java.lang.Long.parseLong;
 
 
 /** */
-public class ETLIp2Location extends ETL<String, IPLocation>
+public class ETLServiceIp2Location extends ETLService<String, NetworkGeolocation>
 {
 
   /** */
-  public ETLIp2Location()
+  public ETLServiceIp2Location()
   {
     super(
       AppProperties.get("file.ip2location_database"),
@@ -31,7 +31,6 @@ public class ETLIp2Location extends ETL<String, IPLocation>
   public List<String> extract(String path)
     throws IOException
   {
-    log(path);
     BufferedReader csvFile = new BufferedReader( new FileReader(path) );
 
     List<String> lines = csvFile
@@ -47,13 +46,13 @@ public class ETLIp2Location extends ETL<String, IPLocation>
   }
 
   /** */
-  public List<IPLocation> transform(List<String> rows)
+  public List<NetworkGeolocation> transform(List<String> rows)
   {
     return rows.stream().map( row -> {
       try {
         String[] rowFields = row.split(",");
 
-        return new IPLocation(
+        return new NetworkGeolocation(
           parseLong(rowFields[0]),
           parseLong(rowFields[1]),
           parseDouble(rowFields[6]),
@@ -70,8 +69,8 @@ public class ETLIp2Location extends ETL<String, IPLocation>
   }
 
   /** */
-  public void load(List<IPLocation> locations)
+  public void load(List<NetworkGeolocation> locations)
   {
-    new IPLocationDao().insert(locations);
+    new NetworkGeolocationSQLDao().upgrade(locations, "ip2location");
   }
 }

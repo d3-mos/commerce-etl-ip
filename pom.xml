@@ -141,7 +141,7 @@
           <artifactId>exec-maven-plugin</artifactId>
           <version>1.6.0</version>
           <configuration>
-            <mainClass>com.globalhitss.claropay.cercademi.job.ipgeolocation.App</mainClass>
+            <mainClass>com.globalhitss.claropay.cercademi.job.networkgeolocation.App</mainClass>
           </configuration>
         </plugin>
       </plugins>
